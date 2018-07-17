@@ -14,7 +14,7 @@ class Perceptron
 
     # inicializando array con los pesos de forma aleatoria
     1.upto(input_number) do
-      milliseconds = (Time.now.to_f-Time.now.to_i)*1000     
+      milliseconds = (Time.now.to_f-Time.now.to_i)*1000
       self.w << Random.new(milliseconds).rand(100) 
     end
 
@@ -37,6 +37,22 @@ class Perceptron
 
     # Si el valor del peso combinado es mayor que cero retorna un 1, 0 en caso contrario
     weighted_average > 0 ? 1 : 0
+  end
+
+  # Funcion de entrenamiento
+  def training(inputs,expected_output)
+    output = predict(inputs)
+    error = expected_output - output
+
+    # El error es la diferencia entre la salida correcta y la esperada
+    if error != 0
+      self.w.zip(inputs).each_with_index do |pair,index|
+        # calcula el nuevo peso usando el error
+        self.w[index] = w[index]+step_size*error*pair.reduce(:*)
+      end
+    end
+    
+    error
   end
 
 
