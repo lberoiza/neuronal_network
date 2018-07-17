@@ -14,12 +14,9 @@ class Perceptron
 
     # inicializando array con los pesos de forma aleatoria
     1.upto(input_number) do
-      milliseconds = (Time.now.to_f-Time.now.to_i)*1000
-      self.w << Random.new(milliseconds).rand(100) 
+      self.w << Random.rand(0.001...1.00)
     end
-
     self.step_size = step_size # La tasa de convergencia
-
   end
 
 
@@ -28,13 +25,14 @@ class Perceptron
     # Producto punto de entrada y pesos
     weighted_average = 0
 
+
     # genera un array con subarray formados por los elementos
-    # entre los pesos y las entradas
+    #  entre los pesos y las entradas
     self.w.zip(inputs).each do |pair|
       # calcula el producto peso y entrada y lo almacena en 'weighted_average'
       weighted_average += pair.reduce(:*)
+     
     end
-
     # Si el valor del peso combinado es mayor que cero retorna un 1, 0 en caso contrario
     weighted_average > 0 ? 1 : 0
   end
@@ -48,7 +46,7 @@ class Perceptron
     if error != 0
       self.w.zip(inputs).each_with_index do |pair,index|
         # calcula el nuevo peso usando el error
-        self.w[index] = w[index]+step_size*error*pair.reduce(:*)
+        self.w[index] = pair[0]+step_size*error*pair[1]
       end
     end
     

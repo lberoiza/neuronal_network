@@ -11,14 +11,15 @@ input_data = [[1.7,56,1], # Mujer de 1.70m y 56kg
               [1.58,55,1],# Mujer de 1.58m y 55kg
               [1.83,80,0],# Hombre de 1.83m y 80kg
               [1.82,70,0],# Hombre de 1.82m y 70kg
-              [1.65,54,1]]# Mujer de 1.65m y 54kg
+              [1.65,54,1],# Mujer de 1.65m y 54kg
+              [1.66,63,1]]# Mujer de 1.66m y 60kg
 
 
 pr = Perceptron.new(3) # Perceptron con 3 entradas
 
 
 # Comenzando el entrenamiento
-1.times do |variable|
+1000.times do |variable|
 
   # La idea del entrenamiento es que los 'pesos' converjan
   input_data.each do |persona|
@@ -30,7 +31,7 @@ pr = Perceptron.new(3) # Perceptron con 3 entradas
 end
 
 
-h = 1,9
-w = 85
+h = 1.66
+w = 61
 
 pr.predict([1,h,w]) == 1 ? (puts "Mujer") : (puts "Hombre")
