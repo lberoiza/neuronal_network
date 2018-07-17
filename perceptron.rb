@@ -1,10 +1,10 @@
 
-
 class Perceptron
 
 
 	attr_accessor :input_number, :w, :step_size
 
+    # Constructor de la clase
  	def initialize(input_number,step_size=0.1)
 	
 		self.input_number = input_number # Número de parámetros de entrada
@@ -35,9 +35,8 @@ class Perceptron
         	weighted_average += pair.reduce(:*)
         end
 
-        if weighted_average > 0:
-            return 1
-        return 0
+        # Si el valor del peso combinado es mayor que cero retorna un 1, 0 en caso contrario
+        weighted_average > 0 ? 1 : 0
     end
 
 
